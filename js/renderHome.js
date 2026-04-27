@@ -25,7 +25,7 @@ const loadHighlight = async () => {
         } else {
             const dateHtml = item.created_at ? `<span class="highlight-date"><i class="fa-regular fa-calendar"></i> ${new Date(item.created_at).toLocaleDateString('th-TH', { year:'numeric', month:'long', day:'numeric' })}</span>` : '';
             
-            const desc = item.short_description || item.excerpt || item.description || 'ไม่มีคำอธิบาย';
+            const desc = item.description || item.content || item.short_description || item.excerpt || 'ไม่มีคำอธิบาย';
             
             // Determine link based on type
             let targetLink = 'courses.html';
@@ -43,9 +43,9 @@ const loadHighlight = async () => {
                     <div class="highlight-row-content">
                         ${item.categories ? `<span class="highlight-pill-badge">${item.categories.name}</span>` : '<span class="highlight-pill-badge">HIGHLIGHT</span>'}
                         <h3 class="highlight-row-title">${item.title || 'ไม่มีชื่อหัวข้อ'}</h3>
-                        <p class="highlight-row-desc">${desc}</p>
-                        <div class="highlight-row-footer" style="margin-top: 1.5rem;">
-                            <a href="${targetLink}" class="highlight-btn-circle"><i class="fa-solid fa-chevron-right"></i></a>
+                        <div class="highlight-row-desc">${desc}</div>
+                        <div class="highlight-row-footer" style="margin-top: 1rem; display: flex; justify-content: flex-end;">
+                            <a href="${targetLink}" class="highlight-read-more">อ่านเพิ่มเติม <i class="fa-solid fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>

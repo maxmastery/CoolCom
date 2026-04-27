@@ -2726,6 +2726,32 @@ select:focus-visible {
     margin-bottom: 1.2rem;
 }
 
+.highlight-row-desc ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    display: grid;
+    gap: 0.8rem;
+}
+
+.highlight-row-desc ul li {
+    position: relative;
+    padding-left: 1.8rem;
+    font-size: 0.95rem;
+    color: rgba(17, 17, 17, 0.8);
+    line-height: 1.5;
+}
+
+.highlight-row-desc ul li::before {
+    content: '\f005'; /* fa-star */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    color: var(--yellow);
+    font-size: 0.8rem;
+}
+
 .highlight-row-features {
     display: grid;
     gap: 0.8rem;
@@ -2745,6 +2771,22 @@ select:focus-visible {
 
 .highlight-row-footer {
     padding-top: 0.5rem;
+}
+
+.highlight-read-more {
+    color: var(--yellow);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.highlight-read-more:hover {
+    transform: translateX(5px);
+    color: #e6b000;
 }
 
 .highlight-btn-circle {
