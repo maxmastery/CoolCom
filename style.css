@@ -1123,7 +1123,8 @@ body:has(.hero-viewport) {
     overflow: hidden;
     display: flex;
     align-items: stretch;
-    min-height: 340px;
+    min-height: 210px;
+    position: relative;
     box-shadow: none;
     transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
@@ -1256,10 +1257,14 @@ body:has(.hero-viewport) {
 }
 
 .highlight-btn-circle {
-    width: 44px;
-    height: 44px;
-    background: #111111;
-    color: #ffffff;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    width: 48px;
+    height: 48px;
+    background: var(--yellow);
+    color: #111111;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1267,14 +1272,16 @@ body:has(.hero-viewport) {
     text-decoration: none;
     transition: all 0.3s ease;
     flex-shrink: 0;
-    font-size: 0.8rem;
+    font-size: 1rem;
+    z-index: 30;
+    box-shadow: 0 10px 20px rgba(255, 195, 0, 0.3);
 }
 
 .highlight-row-card:hover .highlight-btn-circle {
-    background: var(--yellow);
-    color: #111;
-    transform: rotate(-45deg);
-    box-shadow: 0 4px 15px rgba(255, 195, 0, 0.4);
+    background: #000;
+    color: var(--yellow);
+    transform: translate(-50%, 50%) scale(1.1);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
 }
 
 /* Mobile: stack vertically */
@@ -2697,13 +2704,17 @@ select:focus-visible {
 }
 
 .card-special-tag {
-    top: 1.4rem;
-    right: 1.4rem;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -50%);
+    z-index: 30;
     box-shadow: 0 16px 32px rgba(255, 195, 0, 0.24);
 }
 
 .highlight-row-content {
-    padding: 3rem 3rem 2.6rem;
+    padding: 2.5rem 2.5rem 2.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -2764,19 +2775,6 @@ select:focus-visible {
 .highlight-read-more:hover {
     transform: translateX(5px);
     color: #e6b000;
-}
-
-.highlight-btn-circle {
-    width: 48px;
-    height: 48px;
-    box-shadow: 0 16px 32px rgba(17, 17, 17, 0.16);
-}
-
-.highlight-row-card:hover .highlight-btn-circle {
-    transform: translateY(-1px);
-    background: var(--yellow);
-    color: #111;
-    box-shadow: 0 18px 36px rgba(255, 195, 0, 0.26);
 }
 
 .blog-section {
