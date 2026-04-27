@@ -10,11 +10,14 @@ const LAST_VISIT_SESSION_KEY = 'coolcom_last_visit_recorded';
 
 // Check for valid Supabase key format
 setTimeout(() => {
+    console.log('%c [CoolCom] Visitor Tracker Initialized ', 'background: #222; color: #bada55; padding: 2px; font-weight: bold;');
     try {
         const key = supabase.supabaseKey;
         if (!key || key.startsWith('sb_publishable') || !key.startsWith('eyJ')) {
             console.error('%c [CoolCom] CRITICAL: Supabase Key in js/supabaseClient.js is INVALID or a placeholder.', 'background: red; color: white; padding: 4px; font-weight: bold;');
             console.warn('Your current key starts with:', key?.substring(0, 15), '... but it should start with "eyJ"');
+        } else {
+            console.log('[CoolCom] Supabase Key format looks correct.');
         }
     } catch(e) {}
 }, 1000);
@@ -30,6 +33,7 @@ function setCookie(name, value, days = 3650) {
 }
 
 async function trackVisit() {
+    console.log('[CoolCom] trackVisit starting...');
     // 1. Get or generate persistent Visitor ID
     let visitorId = getCookie(VISITOR_COOKIE_NAME);
     if (!visitorId) {
@@ -101,30 +105,33 @@ async function updatePublicStats() {
         if (!visitorsEl) {
             if (retries < maxRetries) {
                 retries++;
-                // console.log(`Footer stats element not found, retry ${retries}/${maxRetries}...`);
+                console.log(`[CoolCom] Footer stats element not found, retry ${retries}/${maxRetries}...`);
                 setTimeout(tryUpdate, 500);
+            } else {
+                console.warn('[CoolCom] Footer stats element NOT FOUND after maximum retries.');
             }
             return;
         }
 
         try {
-            // console.log('Fetching visitor stats...');
+            console.log('[CoolCom] Fetching visitor stats from Supabase...');
             const stats = await getVisitorStats();
             if (stats) {
+                console.log('[CoolCom] Stats received:', stats);
                 visitorsEl.innerText = (stats.totalUniqueVisitors || 0).toLocaleString();
                 // Update other stats if they exist (backward compatibility)
                 const todayEl = document.getElementById('stat-today');
                 const totalEl = document.getElementById('stat-total');
                 if (todayEl) todayEl.innerText = (stats.uniqueVisitorsToday || 0).toLocaleString();
                 if (totalEl) totalEl.innerText = (stats.totalVisits || 0).toLocaleString();
-                // console.log('Public stats updated successfully');
+                console.log('[CoolCom] Visitor count UI updated.');
             } else {
                 visitorsEl.innerText = '0';
-                console.warn('Failed to fetch visitor stats (RPC returned null or empty)');
+                console.warn('[CoolCom] Failed to fetch visitor stats (RPC returned null or empty)');
             }
         } catch (err) {
             visitorsEl.innerText = '0';
-            console.error('Error updating public stats:', err.message);
+            console.error('[CoolCom] Error updating public stats:', err.message);
         }
     };
 
