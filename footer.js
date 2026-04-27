@@ -56,8 +56,6 @@ function injectFooter() {
                         </div>
                     </div>
                     <div class="footer-credits">
-                        <span class="made-in">Made in <strong>Thailand</strong></span>
-                        <span class="made-sep">&mdash;</span>
                         <span class="made-by">Made by <img
                                 src="https://ui-avatars.com/api/?name=C+C&background=random&rounded=true" width="20"
                                 height="20" class="avatar-img" alt="avatar"> <strong>Cool Com Team</strong></span>
