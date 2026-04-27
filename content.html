@@ -36,35 +36,12 @@
     <!-- Video Cards Grid -->
     <section class="content-videos-section">
         <div class="content-videos-grid">
-            <!-- Video Card 1 -->
-            <div class="content-video-card">
-                <div class="content-video-thumb">
-                    <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80" alt="ChatGPT Tech">
-                    <div class="content-play-btn"><i class="fa-solid fa-play"></i></div>
-                </div>
-                <h3 class="content-video-title">เทคนิคใช้ ChatGPT เพื่อสร้างแผนการสอนในเวลา 5 นาที</h3>
-            </div>
-
-            <!-- Video Card 2 -->
-            <div class="content-video-card">
-                <div class="content-video-thumb">
-                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=80" alt="Classroom Tech">
-                </div>
-                <h3 class="content-video-title">นวัตกรรมที่เป็นเลิศ: การใช้เครื่องมือออนไลน์จัดการชั้นเรียน</h3>
-            </div>
-
-            <!-- Video Card 3 -->
-            <div class="content-video-card">
-                <div class="content-video-thumb">
-                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&q=80" alt="Game Over Educational">
-                </div>
-                <h3 class="content-video-title">ระบบดูแลช่วยเหลือนักเรียน: กรณีตัวอย่างจากโรงเรียนนำร่อง</h3>
-            </div>
+            <!-- Dynamic content will be loaded here -->
         </div>
 
         <!-- More Videos Button -->
         <div class="content-more-btn-wrapper">
-            <a href="#" class="content-more-btn"><i class="fa-brands fa-youtube"></i> รับชมวิดีโอเพิ่มเติม</a>
+            <a href="https://www.youtube.com/@CoolCom" target="_blank" class="content-more-btn"><i class="fa-brands fa-youtube"></i> รับชมวิดีโอเพิ่มเติม</a>
         </div>
     </section>
 
@@ -86,6 +63,7 @@
         </div>
     </footer>
     <script src="navbar.js"></script>
+    <script type="module" src="js/renderContent.js"></script>
     <script>
         // Page transition on link click - Smooth fade out
         document.querySelectorAll('a[href$=".html"]').forEach(link => {
