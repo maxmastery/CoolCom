@@ -1123,7 +1123,7 @@ body:has(.hero-viewport) {
     overflow: hidden;
     display: flex;
     align-items: stretch;
-    min-height: 340px;
+    min-height: 240px;
     box-shadow: none;
     transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
@@ -2703,7 +2703,7 @@ select:focus-visible {
 }
 
 .highlight-row-content {
-    padding: 3rem 3rem 2.6rem;
+    padding: 2rem 2.5rem 1.8rem;
 }
 
 .highlight-pill-badge {
@@ -2716,14 +2716,14 @@ select:focus-visible {
 .highlight-row-title {
     font-size: clamp(1.9rem, 3vw, 2.3rem);
     line-height: 1.18;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 }
 
 .highlight-row-desc {
     font-size: 1rem;
     line-height: 1.84;
     color: rgba(17, 17, 17, 0.66);
-    margin-bottom: 1.6rem;
+    margin-bottom: 1.2rem;
 }
 
 .highlight-row-features {
@@ -2744,7 +2744,7 @@ select:focus-visible {
 }
 
 .highlight-row-footer {
-    padding-top: 1rem;
+    padding-top: 0.5rem;
 }
 
 .highlight-btn-circle {
