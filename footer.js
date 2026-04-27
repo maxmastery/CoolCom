@@ -49,18 +49,10 @@ function injectFooter() {
                     <div class="footer-copyright">
                         &copy; 2026 <strong>Cool Com</strong> All Rights Reserved.
                     </div>
-                    <div class="visitor-counter">
-                        <div class="stat-group">
-                            <span class="visitor-label">ผู้เยี่ยมชมวันนี้</span>
-                            <span class="visitor-count" id="stat-today" title="Unique visitors today">...</span>
-                        </div>
-                        <div class="stat-group">
-                            <span class="visitor-label">ผู้เยี่ยมชมทั้งหมด</span>
-                            <span class="visitor-count" id="stat-visitors" title="Total unique visitors">...</span>
-                        </div>
-                        <div class="stat-group">
-                            <span class="visitor-label">จำนวนการเข้าชมทั้งหมด</span>
-                            <span class="visitor-count" id="stat-total" title="Total page views">...</span>
+                    <div class="visitor-counter centered-visitor">
+                        <div class="stat-group-pill">
+                            <span class="visitor-label-pill">VISITORS</span>
+                            <span class="visitor-count-pill" id="stat-visitors">...</span>
                         </div>
                     </div>
                     <div class="footer-credits">

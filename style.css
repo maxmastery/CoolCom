@@ -1771,37 +1771,44 @@ body:has(.hero-viewport) {
     font-size: 0.85rem;
 }
 
-.visitor-counter {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-family: 'Inter', 'Prompt', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 700;
+/* New Centered Pill Visitor Badge */
+.centered-visitor {
+    display: flex;
+    justify-content: center;
+    flex: 1;
 }
 
-.stat-group {
+.stat-group-pill {
     display: inline-flex;
     align-items: stretch;
-    border-radius: 4px;
+    border-radius: 100px;
     overflow: hidden;
-    border: 1px solid rgba(0,0,0,0.1);
+    background: #111;
+    border: 2px solid #111;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-.visitor-label {
-    background-color: #111;
+.visitor-label-pill {
     color: #fff;
-    padding: 0.3rem 0.6rem;
-    letter-spacing: 0.5px;
-    font-size: 0.65rem;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
 }
 
-.visitor-count {
+.visitor-count-pill {
     background-color: #fff;
     color: #111;
-    padding: 0.3rem 0.6rem;
-    min-width: 30px;
+    padding: 0.5rem 1.25rem;
+    min-width: 60px;
     text-align: center;
+    font-weight: 800;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .footer-copyright strong {
@@ -2258,15 +2265,14 @@ body:has(.hero-viewport) {
         padding-left: 1rem;
         padding-right: 1rem;
     }
-    .visitor-counter {
-        flex-wrap: wrap;
+    .centered-visitor {
         justify-content: center;
         margin: 1rem 0;
-        gap: 0.5rem;
+        width: 100%;
+        order: 2;
     }
-    .stat-group {
-        flex: 0 0 auto;
-    }
+    .footer-copyright { order: 1; }
+    .footer-credits { order: 3; }
 }
 
 /* ============================================

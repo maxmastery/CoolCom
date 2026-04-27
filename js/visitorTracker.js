@@ -1,4 +1,4 @@
-import { supabase } from './api.js';
+import { supabase } from './supabaseClient.js';
 
 /**
  * Visitor Tracking System

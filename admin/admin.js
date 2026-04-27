@@ -1,4 +1,6 @@
 import { checkAdminAuth } from './auth.js';
+
+let visitorChartInstance = null;
 import { supabase } from '../js/supabaseClient.js';
 import { fetchTableData, renderTable, deleteRecord, openFormModal } from './crud.js';
 
@@ -280,7 +282,9 @@ async function renderVisitorDashboard(container) {
 
             <div style="background: #fff; padding: 1.5rem; border-radius: 12px; border: 1px solid #eef2f6; margin-bottom: 2rem;">
                 <h3 style="margin-top: 0; font-size: 1.1rem; margin-bottom: 1.5rem;">สถิติการเข้าชม 7 วันล่าสุด</h3>
-                <canvas id="visitorChart" height="100"></canvas>
+                <div style="height: 300px; position: relative;">
+                    <canvas id="visitorChart"></canvas>
+                </div>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 2rem;">
@@ -377,7 +381,11 @@ function render7DayChart(data) {
         if (dayCounts[label] !== undefined) dayCounts[label] = Number(v.total_visits) || 0;
     });
 
-    new Chart(ctx, {
+    if (visitorChartInstance) {
+        visitorChartInstance.destroy();
+    }
+    
+    visitorChartInstance = new Chart(ctx, {
         type: 'line',
         data: {
             labels: days,
