@@ -85,8 +85,7 @@ async function trackVisit() {
         }
     }
 
-    // After tracking, update public stats if elements exist
-    updatePublicStats();
+    // After tracking attempt, logs are stored
 }
 
 /**
@@ -134,9 +133,13 @@ async function updatePublicStats() {
 
 // Execute on load
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', trackVisit);
+    document.addEventListener('DOMContentLoaded', () => {
+        trackVisit();
+        updatePublicStats();
+    });
 } else {
     trackVisit();
+    updatePublicStats();
 }
 
 /**
