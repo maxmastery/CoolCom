@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายละเอียดหลักสูตร - CoolCom</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pages.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .preview-container {
+            max-width: 900px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .preview-card {
+            background: #fff;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .preview-hero {
+            position: relative;
+            height: 450px;
+            overflow: hidden;
+        }
+
+        .preview-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));
+            display: flex;
+            align-items: flex-end;
+            padding: 3rem;
+        }
+
+        .preview-content {
+            padding: 3rem;
+        }
+
+        .preview-title {
+            font-family: 'Prompt', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        .preview-meta {
+            display: flex;
+            gap: 1.5rem;
+            color: rgba(255,255,255,0.8);
+            font-size: 1rem;
+        }
+
+        .preview-body {
+            color: #4b5563;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+
+        .preview-actions {
+            display: flex;
+            justify-content: center;
+            padding-bottom: 3rem;
+        }
+
+        .btn-preview-start {
+            background: #FFC300;
+            color: #111;
+            font-family: 'Prompt', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            padding: 1.2rem 3.5rem;
+            border-radius: 100px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(255, 195, 0, 0.4);
+        }
+
+        .btn-preview-start:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(255, 195, 0, 0.5);
+            background: #111;
+            color: #FFC300;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6b7280;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #FFC300;
+        }
+
+        @media (max-width: 768px) {
+            .preview-hero { height: 300px; }
+            .preview-title { font-size: 1.8rem; }
+            .preview-hero-overlay { padding: 1.5rem; }
+            .preview-content { padding: 2rem; }
+            .btn-preview-start { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-diag-lines"></div>
+    <div id="navbar-container"></div>
+
+    <main class="preview-container">
+        <a href="courses.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> กลับไปหน้าหลักสูตร</a>
+        
+        <div id="preview-content-area">
+            <!-- Dynamic Content -->
+            <div style="text-align: center; padding: 5rem;">
+                <i class="fa-solid fa-spinner fa-spin" style="font-size: 3rem; color: #FFC300;"></i>
+                <p style="margin-top: 1rem; color: #6b7280;">กำลังโหลดรายละเอียดหลักสูตร...</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <!-- Minimal Footer for Preview -->
+        <div class="footer-container" style="text-align: center; padding: 3rem 0;">
+             <p>&copy; 2026 Cool Com - Educational platform for Thai Computer Teachers</p>
+        </div>
+    </footer>
+
+    <script src="navbar.js"></script>
+    <script type="module" src="js/renderCoursePreview.js"></script>
+</body>
+
+</html>

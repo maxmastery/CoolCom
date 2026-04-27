@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool Blog - บทความสำหรับครูไทย | CoolCom</title>
+    <meta name="description" content="บทความ ข่าวสาร และเทคโนโลยีการศึกษา สำหรับครูไทยทุกคน">
+    <!-- Open Graph / Social Preview -->
+    <meta property="og:title" content="Cool Blog - บทความสำหรับครูไทย | CoolCom">
+    <meta property="og:description" content="บทความ ข่าวสาร และเทคโนโลยีการศึกษา สำหรับครูไทยทุกคน">
+    <meta property="og:image" content="https://drive.google.com/uc?export=view&id=1ZlwJVV6rZ0Atekv3QCXnIfKiK1587em5">
+    <meta property="og:url" content="https://coolcom.click/blog.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pages.css">
+    <link rel="stylesheet" href="blog-post.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Prompt:wght@400;500;600;700;800&family=Mitr:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="https://drive.google.com/thumbnail?id=1lkEII-FEDJpZt4dCuCa5-WU1ivEm8joC&sz=w128">
+</head>
+<body>
+    <div class="bg-diag-lines"></div>
+    <div class="bg-blur light"></div>
+
+    <!-- Navbar Container -->
+    <div id="navbar-container"></div>
+
+    <section class="blog-post-main">
+        <div class="bp-wrapper" id="blog-post-container">
+            <!-- Dynamic content from renderBlogPost.js will be loaded here -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-top new-footer-top">
+                <div class="footer-brand left-brand">
+                    <div class="footer-logo"><img src="https://drive.google.com/thumbnail?id=1bqWEpExI8Dzxp8PE1XaRhVqme_tpTEYA&sz=w400" alt="Cool Com Logo" class="footer-logo-img"></div>
+                    <p class="footer-desc">พื้นที่สำหรับแบ่งปันสิ่งดี ๆ<br>สำหรับครูไทยทุกคน</p>
+                    <div class="footer-social-circles"><a href="#"><i class="fa-brands fa-x-twitter"></i></a><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="#"><i class="fa-brands fa-youtube"></i></a></div>
+                </div>
+                <div class="footer-links-grid right-links">
+                    <div class="footer-col"><h4 class="footer-col-title">Quick links</h4><ul><li><a href="courses.html">Courses</a></li><li><a href="tools.html">Tools</a></li><li><a href="blog.html">Blog</a></li><li><a href="content.html">Content</a></li></ul></div>
+                    <div class="footer-col"><h4 class="footer-col-title">Other pages</h4><ul><li><a href="about.html">About us</a></li><li><a href="contact.html">Contact us</a></li><li><a href="shop.html">Cool Shop</a></li></ul></div>
+                    <div class="footer-col"><h4 class="footer-col-title">Other Information</h4><ul><li class="footer-text-li">contact@coolcom.click</li><li class="footer-text-li">Buriram Thaniland</li></ul></div>
+                </div>
+            </div>
+            <div class="footer-bottom new-footer-bottom"><div class="footer-copyright">&copy; 2026 <strong>Cool Com</strong> All Rights Reserved.</div><div class="footer-credits"><span class="made-in">Made in <strong>Thailand</strong></span><span class="made-sep">&mdash;</span><span class="made-by">Made by <strong>Cool Com Team</strong></span></div></div>
+        </div>
+    </footer>
+
+    <script src="navbar.js"></script>
+    <script>
+        // Page transition on link click - Smooth fade out
+        document.querySelectorAll('a[href$=".html"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href && !href.startsWith('http')) {
+                    e.preventDefault();
+                    // Smooth fade out all content except navbar with slide down
+                    document.querySelectorAll('body > *:not(#navbar-container)').forEach(el => {
+                        el.style.transition = 'opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                        el.style.opacity = '0';
+                        el.style.transform = 'translateY(20px)';
+                    });
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 400);
+                }
+            });
+        });
+    </script>
+    <script type="module" src="js/renderBlogPost.js"></script>
+</body>
+</html>

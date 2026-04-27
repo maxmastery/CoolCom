@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - CoolCom Admin</title>
+    <!-- Use main style for typography variables if needed, otherwise rely on admin.css -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Prompt:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <span style="color:var(--admin-primary);"><i class="fa-solid fa-bolt"></i></span> CoolCom Admin
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
+            <a href="#" class="nav-item" data-page="courses"><i class="fa-solid fa-graduation-cap"></i> Courses</a>
+            <a href="#" class="nav-item" data-page="tools"><i class="fa-solid fa-screwdriver-wrench"></i> Tools</a>
+            <a href="#" class="nav-item" data-page="blog"><i class="fa-solid fa-newspaper"></i> Blog</a>
+            <a href="#" class="nav-item" data-page="content"><i class="fa-solid fa-video"></i> Content</a>
+            <a href="#" class="nav-item" data-page="shop"><i class="fa-solid fa-store"></i> Shop</a>
+            <a href="#" class="nav-item" data-page="categories"><i class="fa-solid fa-tags"></i> Categories</a>
+            <a href="#" class="nav-item" data-page="announcements"><i class="fa-solid fa-bullhorn"></i> Announcements</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="#" id="logout-btn" class="nav-item" style="color: #ef4444;"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            <a href="../index.html" target="_blank" class="nav-item" style="font-size: 0.85rem;"><i class="fa-solid fa-arrow-up-right-from-square"></i> ไปที่หน้าเว็บหลัก</a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="app-content">
+        <div class="page-header">
+            <h2 class="page-title" id="page-title-text">Dashboard</h2>
+            <button id="add-new-btn" class="btn-primary" style="width: auto; padding: 0.5rem 1rem; display: none;">
+                <i class="fa-solid fa-plus"></i> เพิ่มข้อมูล
+            </button>
+        </div>
+        
+        <div id="page-body">
+            <!-- Dynamic Content loaded by admin.js -->
+            <p style="color: var(--admin-text-muted);">กำลังโหลดเนื้อหา...</p>
+        </div>
+    </main>
+
+    <!-- Global Modal Container for Forms -->
+    <div id="crud-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">เพิ่มข้อมูล</h3>
+                <button class="close-btn" id="close-modal-btn">&times;</button>
+            </div>
+            <div id="modal-body">
+                <!-- Form fields injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="admin.js"></script>
+</body>
+</html>
