@@ -263,140 +263,9 @@
     </div>
 
     <!-- Footer -->
-    <footer class="site-footer">
-        <div class="footer-container">
-            <div class="footer-top new-footer-top">
-                <div class="footer-brand left-brand">
-                    <div class="footer-logo">
-                        <img src="https://drive.google.com/thumbnail?id=1bqWEpExI8Dzxp8PE1XaRhVqme_tpTEYA&sz=w400"
-                            alt="Cool Com Logo" class="footer-logo-img">
-                    </div>
-                    <p class="footer-desc">
-                        พื้นที่สำหรับแบ่งปันสิ่งดี ๆ<br>สำหรับครูไทยทุกคน
-                    </p>
-                    <div class="footer-social-circles">
-                        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#"><i class="fa-brands fa-dribbble"></i></a>
-                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                    </div>
-                </div>
-
-                <div class="footer-links-grid right-links">
-                    <div class="footer-col">
-                        <h4 class="footer-col-title">Quick links</h4>
-                        <ul>
-                            <li><a href="courses.html">Courses</a></li>
-                            <li><a href="tools.html">Tools</a></li>
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="content.html">Content</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4 class="footer-col-title">Other pages</h4>
-                        <ul>
-                            <li><a href="about.html">About us</a></li>
-                            <li><a href="contact.html">Contact us</a></li>
-                            <li><a href="shop.html">Cool Shop</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4 class="footer-col-title">Other Information</h4>
-                        <ul>
-                            <li class="footer-text-li">contact@coolcom.click</li>
-                            <li class="footer-text-li">Buriram Thaniland</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-bottom new-footer-bottom">
-                <div class="footer-copyright">
-                    &copy; 2026 <strong>Cool Com</strong> All Rights Reserved.
-                </div>
-                <div class="visitor-counter">
-                    <span class="visitor-label">VISITORS</span>
-                    <span class="visitor-count" id="visitor-count">...</span>
-                </div>
-                <div class="footer-credits">
-                    <span class="made-in">Made in <strong>Thailand</strong></span>
-                    <span class="made-sep">&mdash;</span>
-                    <span class="made-by">Made by <img
-                            src="https://ui-avatars.com/api/?name=C+C&background=random&rounded=true" width="20"
-                            height="20" class="avatar-img" alt="avatar"> <strong>Cool Com Team</strong></span>
-                    <span class="made-sep">&mdash;</span>
-                    <span class="admin-link"><a href="admin/login.html" style="color: var(--text-light); text-decoration: none; font-size: 0.8rem;"><i class="fa-solid fa-lock"></i> Admin</a></span>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <footer class="site-footer"></footer>
 
     <script type="module" src="js/renderHome.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const mobileBtn = document.querySelector('.mobile-menu-btn');
-            const navRight = document.querySelector('.nav-right');
-
-            if (mobileBtn && navRight) {
-                mobileBtn.addEventListener('click', () => {
-                    navRight.classList.toggle('active');
-                });
-            }
-
-            // ==============================
-            // Visitor Counter
-            // ==============================
-            const counterEl = document.getElementById('visitor-count');
-            const STORAGE_KEY = 'coolcom_visit_count';
-            const SESSION_KEY = 'coolcom_session_counted';
-
-            function displayCount(n) {
-                if (counterEl) {
-                    counterEl.textContent = Number(n).toLocaleString();
-                }
-            }
-
-            function localFallback() {
-                // ใช้ localStorage เป็น fallback
-                let count = parseInt(localStorage.getItem(STORAGE_KEY) || '0');
-                const alreadyCounted = sessionStorage.getItem(SESSION_KEY);
-                if (!alreadyCounted) {
-                    count += 1;
-                    localStorage.setItem(STORAGE_KEY, count);
-                    sessionStorage.setItem(SESSION_KEY, '1');
-                }
-                displayCount(count);
-            }
-
-            // ลอง CounterAPI ก่อน (free, no key needed)
-            // namespace: coolcom-website, key: visitors
-            const alreadyCounted = sessionStorage.getItem(SESSION_KEY);
-            const apiBase = 'https://api.counterapi.dev/v1/coolcom-website/visitors';
-
-            if (alreadyCounted) {
-                // session นี้ นับแล้ว → แค่ดึงค่าปัจจุบัน ไม่เพิ่ม
-                fetch(apiBase)
-                    .then(r => r.json())
-                    .then(d => displayCount(d.count ?? d.value ?? localStorage.getItem(STORAGE_KEY) ?? 0))
-                    .catch(() => displayCount(localStorage.getItem(STORAGE_KEY) ?? 0));
-            } else {
-                // session ใหม่ → เพิ่ม 1
-                fetch(apiBase + '/up', { method: 'PUT' })
-                    .then(r => r.json())
-                    .then(d => {
-                        const count = d.count ?? d.value;
-                        if (count !== undefined) {
-                            sessionStorage.setItem(SESSION_KEY, '1');
-                            localStorage.setItem(STORAGE_KEY, count);
-                            displayCount(count);
-                        } else {
-                            localFallback();
-                        }
-                    })
-                    .catch(() => localFallback());
-            }
-        });
-    </script>
     <script src="navbar.js"></script>
     <script type="module" src="js/popup.js"></script>
     <script>
@@ -438,6 +307,8 @@
             });
         });
     </script>
+    <script src="footer.js"></script>
+    <script type="module" src="js/visitorTracker.js"></script>
 </body>
 
 </html>

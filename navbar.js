@@ -17,6 +17,7 @@ function injectNavbar() {
                 <span class="logo-text"><span class="logo-cool">Cool</span><span class="logo-com">Com</span></span>
             </a>
             <ul class="nav-links">
+                <li><a href="index.html" class="${isActive('index.html')}">Home</a></li>
                 <li><a href="courses.html" class="${isActive('courses.html')}">Courses</a></li>
                 <li><a href="tools.html" class="${isActive('tools.html')}">Tools</a></li>
                 <li><a href="blog.html" class="${isActive('blog.html')}">Blog</a></li>
