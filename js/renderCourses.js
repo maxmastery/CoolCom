@@ -50,11 +50,59 @@ document.addEventListener('DOMContentLoaded', async () => {
             grid.appendChild(card);
         });
 
-        // Trigger the filtering script if it exists in the original page
-        // A simple re-dispatch can help existing scripts catch up
-        window.dispatchEvent(new Event('resize')); 
+        });
+
+        // Initialize Filtering and Search after cards are rendered
+        initFilteringAndSearch();
 
     } catch (error) {
         showErrorState(grid, error.message);
     }
 });
+
+function initFilteringAndSearch() {
+    const tagBtns = document.querySelectorAll('.tag-btn');
+    const searchInput = document.getElementById('course-search');
+    const cards = document.querySelectorAll('.course-card');
+
+    tagBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tagBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const cat = btn.dataset.cat;
+            
+            cards.forEach(card => {
+                if (cat === 'all') {
+                    card.style.display = '';
+                } else if (cat === 'recommended') {
+                    // Show only if it has featured badge or featured data
+                    const isFeatured = card.querySelector('.cc-featured-badge');
+                    card.style.display = isFeatured ? '' : 'none';
+                } else {
+                    // Category filter
+                    if (card.dataset.cat === cat) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+            
+            // Scroll to top of results on mobile
+            if (window.innerWidth < 768) {
+                document.querySelector('.courses-main').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            const q = searchInput.value.toLowerCase();
+            cards.forEach(card => {
+                const title = card.querySelector('.cc-title')?.textContent.toLowerCase() || '';
+                const desc = card.querySelector('.cc-desc')?.textContent.toLowerCase() || '';
+                card.style.display = (title.includes(q) || desc.includes(q)) ? '' : 'none';
+            });
+        });
+    }
+}

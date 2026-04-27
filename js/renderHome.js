@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const videoContainer = document.getElementById('home-video-grid');
 
     // 1. Render Highlight (Special Selection or Featured)
-    if (highlightContainer) {
+    const loadHighlight = async () => {
+        if (!highlightContainer) return;
         showLoadingState(highlightContainer);
         try {
             const item = await fetchHighlightContent();
@@ -45,12 +46,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                 `;
             }
         } catch (err) {
+            console.error('Highlight error:', err);
             showErrorState(highlightContainer);
         }
-    }
+    };
 
     // 2. Render Blog of the Week
-    if (blogContainer) {
+    const loadBlogs = async () => {
+        if (!blogContainer) return;
         showLoadingState(blogContainer);
         try {
             const blogs = await fetchBlogPosts(3);
@@ -62,7 +65,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 blogs.forEach(blog => {
                     const date = blog.published_at || blog.created_at;
                     const dateStr = date ? new Date(date).toLocaleDateString('th-TH', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
-                    const desc = blog.excerpt || blog.content?.substring(0, 80) + '...' || '';
+                    const desc = blog.excerpt || (blog.content ? blog.content.substring(0, 80) + '...' : '');
                     const catName = blog.categories ? blog.categories.name : 'บทความทั่วไป';
 
                     const html = `
@@ -86,20 +89,21 @@ document.addEventListener('DOMContentLoaded', async () => {
                 });
             }
         } catch (err) {
+            console.error('Blog error:', err);
             showErrorState(blogContainer);
         }
-    }
+    };
 
     // 3. Render Videos
-    if (videoContainer) {
-        // Since we removed 'video-player.js', we incorporate the UI binding logic here
+    const loadVideos = async () => {
+        if (!videoContainer) return;
         showLoadingState(videoContainer);
         try {
             const videos = await fetchContentVideos(3);
             if (!videos || videos.length === 0) {
                 showEmptyState(videoContainer, 'Content ดี ๆ กำลังจะมาเร็ว ๆ นี้', 'fa-solid fa-circle-play');
             } else {
-                // Determine Main Video
+                // ... same video logic ...
                 const mainVideo = videos[0];
                 const mainYoutubeId = mainVideo.youtube_id || extractYoutubeId(mainVideo.youtube_url);
                 
@@ -114,12 +118,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </div>
                 `;
 
-                // Render video list items
                 videos.forEach((video, index) => {
                     const yId = video.youtube_id || extractYoutubeId(video.youtube_url);
                     const thumb = video.thumbnail_url || `https://img.youtube.com/vi/${yId}/hqdefault.jpg`;
                     const activeClass = index === 0 ? 'is-active' : '';
-                    
                     html += `
                     <div class="video-item ${activeClass}" data-video-id="${yId}">
                         <div class="video-item-thumb">
@@ -133,50 +135,39 @@ document.addEventListener('DOMContentLoaded', async () => {
                 });
 
                 videoContainer.innerHTML = html;
-                
-                // Bind Video Interactivity (From old video-player.js logic)
-                const mainPlayer = videoContainer.querySelector('.video-player-iframe');
-                const mainTitle = videoContainer.querySelector('.video-main-title');
-                const videoItems = videoContainer.querySelectorAll('.video-item');
-
-                // Initially expand
-                videoContainer.classList.add('is-expanded');
-
-                videoItems.forEach(item => {
-                    item.addEventListener('click', () => {
-                        const videoId = item.getAttribute('data-video-id');
-                        const title = item.querySelector('.video-item-title').innerText;
-
-                        // Expand showcase if not already
-                        videoContainer.classList.add('is-expanded');
-
-                        // Swap Video Source
-                        if (mainPlayer) {
-                            mainPlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-                        }
-
-                        // Update Main Title
-                        if (mainTitle) {
-                            mainTitle.innerText = title;
-                        }
-
-                        // Update Active State in List
-                        videoItems.forEach(v => v.classList.remove('is-active'));
-                        item.classList.add('is-active');
-
-                        // Scroll to player on mobile
-                        if (window.innerWidth < 768) {
-                            videoContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
-                    });
-                });
-
+                setupVideoInteractivity(videoContainer);
             }
         } catch (err) {
+            console.error('Video error:', err);
             showErrorState(videoContainer);
         }
-    }
+    };
+
+    // Run all loads
+    loadHighlight();
+    loadBlogs();
+    loadVideos();
 });
+
+function setupVideoInteractivity(videoContainer) {
+    const mainPlayer = videoContainer.querySelector('.video-player-iframe');
+    const mainTitle = videoContainer.querySelector('.video-main-title');
+    const videoItems = videoContainer.querySelectorAll('.video-item');
+
+    videoContainer.classList.add('is-expanded');
+
+    videoItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const videoId = item.getAttribute('data-video-id');
+            const title = item.querySelector('.video-item-title').innerText;
+            if (mainPlayer) mainPlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            if (mainTitle) mainTitle.innerText = title;
+            videoItems.forEach(v => v.classList.remove('is-active'));
+            item.classList.add('is-active');
+            if (window.innerWidth < 768) videoContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+}
 
 function extractYoutubeId(url) {
     if (!url) return '';

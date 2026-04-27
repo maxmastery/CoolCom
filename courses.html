@@ -138,58 +138,6 @@
                 }
             });
         });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            // Mobile menu is handled by navbar.js
-
-            // Filter by category
-            const tagBtns = document.querySelectorAll('.tag-btn');
-            const cards = document.querySelectorAll('.course-card, .course-highlight-card');
-            tagBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    tagBtns.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    const cat = btn.dataset.cat;
-                    
-                    cards.forEach(card => {
-                        const isHighlight = card.classList.contains('course-highlight-card');
-                        const isRegular = card.classList.contains('course-card');
-                        
-                        if (cat === 'all') {
-                            // Show only regular courses, hide highlights
-                            if (isRegular) card.style.display = '';
-                            if (isHighlight) card.style.display = 'none';
-                        } else if (cat === 'recommended') {
-                            // Show only highlights
-                            if (isHighlight) card.style.display = '';
-                            if (isRegular) card.style.display = 'none';
-                        } else {
-                            // Category filter: show card if category matches (usually only for regular cards)
-                            if (card.dataset.cat === cat) {
-                                card.style.display = '';
-                            } else {
-                                card.style.display = 'none';
-                            }
-                        }
-                    });
-                    
-                    // Also scroll to results if on mobile
-                    if (window.innerWidth < 768) {
-                        document.querySelector('.courses-main').scrollIntoView({ behavior: 'smooth' });
-                    }
-                });
-            });
-
-            // Search
-            const searchInput = document.getElementById('course-search');
-            searchInput.addEventListener('input', () => {
-                const q = searchInput.value.toLowerCase();
-                cards.forEach(card => {
-                    const title = card.querySelector('.chc-title, .cc-title')?.textContent.toLowerCase() || '';
-                    card.style.display = title.includes(q) ? '' : 'none';
-                });
-            });
-        });
     </script>
 </body>
 </html>

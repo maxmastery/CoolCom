@@ -53,6 +53,7 @@ create table public.courses (
   category_id uuid references public.categories(id) on delete set null,
   status text default 'draft', -- draft, published, archived
   featured boolean default false,
+  is_special boolean default false,
   sort_order int default 0,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
@@ -69,6 +70,7 @@ create table public.tools (
   category_id uuid references public.categories(id) on delete set null,
   status text default 'draft',
   featured boolean default false,
+  is_special boolean default false,
   sort_order int default 0,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
@@ -87,6 +89,7 @@ create table public.blog_posts (
   category_id uuid references public.categories(id) on delete set null,
   status text default 'draft',
   featured boolean default false,
+  is_special boolean default false,
   published_at timestamptz,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
@@ -104,6 +107,7 @@ create table public.content_videos (
   category_id uuid references public.categories(id) on delete set null,
   status text default 'draft',
   featured boolean default false,
+  is_special boolean default false,
   sort_order int default 0,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
@@ -126,6 +130,7 @@ create table public.products (
   category_id uuid references public.categories(id) on delete set null,
   status text default 'draft',
   featured boolean default false,
+  is_special boolean default false,
   sort_order int default 0,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
