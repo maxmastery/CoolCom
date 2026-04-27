@@ -101,12 +101,24 @@ export async function fetchHighlightContent() {
   
   for (const table of tables) {
     try {
-      const { data, error } = await supabase.from(table)
+      // First try with join
+      let { data, error } = await supabase.from(table)
         .select('*, categories(name, slug)')
         .eq('status', 'published')
         .eq('is_special', true)
         .order('created_at', { ascending: false })
         .limit(1);
+        
+      if (error || !data || data.length === 0) {
+        // Try without join as fallback
+        const result = await supabase.from(table)
+          .select('*')
+          .eq('status', 'published')
+          .eq('is_special', true)
+          .order('created_at', { ascending: false })
+          .limit(1);
+        data = result.data;
+      }
         
       if (data && data.length > 0) {
         return { ...data[0], type: table };

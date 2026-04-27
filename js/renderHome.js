@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             } else {
                 const dateHtml = item.created_at ? `<span class="highlight-date"><i class="fa-regular fa-calendar"></i> ${new Date(item.created_at).toLocaleDateString('th-TH', { year:'numeric', month:'long', day:'numeric' })}</span>` : '';
                 
-                const desc = item.short_description || item.excerpt || (item.description ? item.description.substring(0, 150) + '...' : 'ไม่มีคำอธิบาย');
+                const rawDesc = item.short_description || item.excerpt || item.description || '';
+                const desc = typeof rawDesc === 'string' ? rawDesc.substring(0, 150) + (rawDesc.length > 150 ? '...' : '') : 'ไม่มีคำอธิบาย';
                 
                 // Determine link based on type
                 let targetLink = 'courses.html';
@@ -31,11 +32,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <div class="highlight-row-card">
                         <div class="highlight-row-img">
                             <span class="card-special-tag">SPECIAL!</span>
-                            <img src="${item.thumbnail_url || 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=800&q=80'}" alt="${item.title}">
+                            <img src="${item.thumbnail_url || 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=800&q=80'}" alt="${item.title || 'Highlight'}">
                         </div>
                         <div class="highlight-row-content">
                             ${item.categories ? `<span class="highlight-pill-badge">${item.categories.name}</span>` : '<span class="highlight-pill-badge">HIGHLIGHT</span>'}
-                            <h3 class="highlight-row-title">${item.title}</h3>
+                            <h3 class="highlight-row-title">${item.title || 'ไม่มีชื่อหัวข้อ'}</h3>
                             <p class="highlight-row-desc" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">${desc}</p>
                             <div class="highlight-row-footer" style="margin-top: 1.5rem;">
                                 ${dateHtml}
@@ -65,18 +66,21 @@ document.addEventListener('DOMContentLoaded', async () => {
                 blogs.forEach(blog => {
                     const date = blog.published_at || blog.created_at;
                     const dateStr = date ? new Date(date).toLocaleDateString('th-TH', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
-                    const desc = blog.excerpt || (blog.content ? blog.content.substring(0, 80) + '...' : '');
-                    const catName = blog.categories ? blog.categories.name : 'บทความทั่วไป';
+                    
+                    const rawExcerpt = blog.excerpt || blog.content || '';
+                    const desc = typeof rawExcerpt === 'string' ? rawExcerpt.substring(0, 80) + (rawExcerpt.length > 80 ? '...' : '') : '';
+                    
+                    const catName = blog.categories ? (Array.isArray(blog.categories) ? blog.categories[0]?.name : blog.categories.name) : 'บทความทั่วไป';
 
                     const html = `
                     <div class="blog-card-v2">
                         <div class="bcv2-img">
-                            <img src="${blog.thumbnail_url || 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80'}" alt="${blog.title}">
+                            <img src="${blog.thumbnail_url || 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80'}" alt="${blog.title || 'Blog'}">
                             <span class="bcv2-cat">${catName}</span>
                         </div>
                         <div class="bcv2-body">
                             <div class="bcv2-date"><i class="fa-regular fa-clock"></i> ${dateStr}</div>
-                            <h3 class="bcv2-title" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${blog.title}</h3>
+                            <h3 class="bcv2-title" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${blog.title || 'ไม่มีชื่อหัวข้อ'}</h3>
                             <p class="bcv2-desc" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${desc}</p>
                             <div class="bcv2-footer">
                                 <a href="blog-post.html?slug=${blog.slug}" class="bcv2-link">อ่านเพิ่มเติม <i class="fa-solid fa-arrow-right"></i></a>

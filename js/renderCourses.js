@@ -1,3 +1,4 @@
+import { supabase } from './supabaseClient.js';
 import { fetchCourses } from './api.js';
 import { formatPrice, showLoadingState, showEmptyState, showErrorState } from './utils.js';
 
@@ -50,15 +51,46 @@ document.addEventListener('DOMContentLoaded', async () => {
             grid.appendChild(card);
         });
 
-        });
+        // Dynamic Categories
+        await renderCategoryTags();
 
         // Initialize Filtering and Search after cards are rendered
         initFilteringAndSearch();
 
     } catch (error) {
+        console.error('Render courses error:', error);
         showErrorState(grid, error.message);
     }
 });
+
+async function renderCategoryTags() {
+    const tagContainer = document.querySelector('.courses-tags');
+    if (!tagContainer) return;
+
+    try {
+        const { data: categories, error } = await supabase
+            .from('categories')
+            .select('*')
+            .eq('type', 'course')
+            .order('sort_order', { ascending: true });
+
+        if (error) throw error;
+
+        // Start with "All" and "Recommended"
+        let html = `
+            <button class="tag-btn active" data-cat="all">ทั้งหมด</button>
+            <button class="tag-btn" data-cat="recommended">คอร์สแนะนำ</button>
+        `;
+
+        categories.forEach(cat => {
+            html += `<button class="tag-btn" data-cat="${cat.slug}">${cat.name}</button>`;
+        });
+
+        tagContainer.innerHTML = html;
+    } catch (err) {
+        console.warn('Failed to load categories dynamically, using hardcoded tags.', err);
+    }
+}
 
 function initFilteringAndSearch() {
     const tagBtns = document.querySelectorAll('.tag-btn');
