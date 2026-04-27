@@ -20,8 +20,8 @@ export function showEmptyState(container, message = 'ยังไม่มีข
     container.innerHTML = `
         <div class="empty-state" style="text-align: center; padding: 4rem 2rem; width: 100%; grid-column: 1 / -1; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px dashed rgba(255,255,255,0.1);">
             <i class="${iconClass}" style="font-size: 3rem; color: rgba(255,255,255,0.3); margin-bottom: 1rem;"></i>
-            <h3 style="color: var(--text-dark); margin-bottom: 0.5rem;">${message}</h3>
-            <p style="color: var(--text-light); font-size: 0.9rem;">ข้อมูลจะถูกเพิ่มเข้ามาในเร็ว ๆ นี้</p>
+            <h3 style="color: #fff; margin-bottom: 0.5rem;">${message}</h3>
+            <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem;">ข้อมูลจะถูกเพิ่มเข้ามาในเร็ว ๆ นี้</p>
         </div>
     `;
 }

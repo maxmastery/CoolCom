@@ -8,6 +8,17 @@ import { supabase } from './supabaseClient.js';
 const VISITOR_COOKIE_NAME = 'coolcom_visitor_id';
 const LAST_VISIT_SESSION_KEY = 'coolcom_last_visit_recorded';
 
+// Check for valid Supabase key format
+setTimeout(() => {
+    try {
+        const key = supabase.supabaseKey;
+        if (!key || key.startsWith('sb_publishable') || !key.startsWith('eyJ')) {
+            console.error('%c [CoolCom] CRITICAL: Supabase Key in js/supabaseClient.js is INVALID or a placeholder.', 'background: red; color: white; padding: 4px; font-weight: bold;');
+            console.warn('Your current key starts with:', key?.substring(0, 15), '... but it should start with "eyJ"');
+        }
+    } catch(e) {}
+}, 1000);
+
 function getCookie(name) {
     const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
     return match ? decodeURIComponent(match[2]) : null;
@@ -69,6 +80,9 @@ async function trackVisit() {
 
     } catch (err) {
         console.warn('Visitor tracking failed:', err.message);
+        if (err.message.includes('apiKey') || err.message.includes('sb_publishable')) {
+            console.error('CRITICAL: Supabase Key seems invalid. Please check js/supabaseClient.js');
+        }
     }
 
     // After tracking, update public stats if elements exist
