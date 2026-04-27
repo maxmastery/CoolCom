@@ -56,151 +56,16 @@
                 <button class="shop-cat-btn" data-cat="tool"><i class="fa-solid fa-wrench"></i> เครื่องมือ</button>
             </div>
 
-            <!-- Featured Banner -->
-            <div class="shop-featured-banner">
-                <div class="sfb-text">
-                    <span class="sfb-tag"><i class="fa-solid fa-fire"></i> ขายดี</span>
-                    <h2>อีบุ๊กติวสอบครูผู้ช่วย<br><span class="text-yellow">สพฐ. 2569</span> ฉบับสมบูรณ์</h2>
-                    <p>อีบุ๊กครบทุกเนื้อหา ภาค ก และ ภาค ข พร้อมข้อสอบเก่าพร้อมเฉลย</p>
-                    <div class="sfb-price-row">
-                        <span class="sfb-price">฿299</span>
-                        <span class="sfb-original">฿599</span>
-                        <span class="sfb-discount">ลด 50%</span>
-                    </div>
-                    <a href="#" class="btn-shop-primary"><i class="fa-solid fa-cart-plus"></i> เพิ่มลงตะกร้า</a>
-                </div>
-                <div class="sfb-image">
-                    <div class="sfb-book-mock">
-                        <div class="bm-spine"></div>
-                        <div class="bm-cover">
-                            <span class="bm-label">EXAM</span>
-                            <span class="bm-title">ครูผู้ช่วย<br>2569</span>
-                            <span class="bm-sub">ฉบับสมบูรณ์</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Featured Banner (Dynamic) -->
+            <div id="shop-featured-container"></div>
 
             <!-- Products Grid -->
             <div class="shop-grid" id="shop-grid">
-
-                <!-- Ebook 1 -->
-                <div class="shop-product-card" data-cat="ebook">
-                    <div class="spc-img">
-                        <div class="spc-book" style="--bk-color:#FFC300;--bk-dark:#e6b000;">
-                            <div class="bk-spine"></div>
-                            <div class="bk-face"><span class="bk-icon"><i class="fa-solid fa-brain"></i></span><span class="bk-t">ภาค ก<br>สมบูรณ์</span></div>
-                        </div>
-                        <span class="spc-tag">อีบุ๊ค</span>
-                        <span class="spc-badge-hot">Best Seller</span>
-                    </div>
-                    <div class="spc-body">
-                        <h3 class="spc-title">คู่มือติวภาค ก ครูผู้ช่วย 2569</h3>
-                        <p class="spc-desc">ครบทุกหมวด วิชาชีพ ปรัชญา จิตวิทยา หลักสูตร</p>
-                        <div class="spc-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i> <span>(128)</span></div>
-                        <div class="spc-footer">
-                            <div class="spc-price-wrap"><span class="spc-price">฿199</span><span class="spc-old">฿399</span></div>
-                            <button class="spc-add-btn"><i class="fa-solid fa-cart-plus"></i></button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Ebook 2 -->
-                <div class="shop-product-card" data-cat="ebook">
-                    <div class="spc-img">
-                        <div class="spc-book" style="--bk-color:#111;--bk-dark:#333;">
-                            <div class="bk-spine"></div>
-                            <div class="bk-face"><span class="bk-icon"><i class="fa-solid fa-code"></i></span><span class="bk-t">Python<br>ครู</span></div>
-                        </div>
-                        <span class="spc-tag">อีบุ๊ค</span>
-                    </div>
-                    <div class="spc-body">
-                        <h3 class="spc-title">สอน Python สำหรับครู ฉบับมือใหม่</h3>
-                        <p class="spc-desc">เรียนรู้ Python ตั้งแต่เริ่มต้น พร้อมตัวอย่างจริงในชั้นเรียน</p>
-                        <div class="spc-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> <span>(54)</span></div>
-                        <div class="spc-footer">
-                            <div class="spc-price-wrap"><span class="spc-price">฿149</span><span class="spc-old">฿299</span></div>
-                            <button class="spc-add-btn"><i class="fa-solid fa-cart-plus"></i></button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Course -->
-                <div class="shop-product-card" data-cat="course">
-                    <div class="spc-img course-img">
-                        <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=400&q=80" alt="AI Course">
-                        <span class="spc-tag">คอร์สพิเศษ</span>
-                        <span class="spc-badge-new">NEW</span>
-                    </div>
-                    <div class="spc-body">
-                        <h3 class="spc-title">AI สำหรับครู: Masterclass 2026</h3>
-                        <p class="spc-desc">เรียนรู้ AI และ ChatGPT เพื่อนำมาปฏิวัติห้องเรียนของคุณ</p>
-                        <div class="spc-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> <span>(92)</span></div>
-                        <div class="spc-footer">
-                            <div class="spc-price-wrap"><span class="spc-price">฿499</span><span class="spc-old">฿999</span></div>
-                            <button class="spc-add-btn"><i class="fa-solid fa-cart-plus"></i></button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Media -->
-                <div class="shop-product-card" data-cat="media">
-                    <div class="spc-img">
-                        <div class="spc-book" style="--bk-color:#7c3aed;--bk-dark:#5b21b6;">
-                            <div class="bk-spine"></div>
-                            <div class="bk-face"><span class="bk-icon"><i class="fa-solid fa-palette"></i></span><span class="bk-t">Canva<br>Pro Kit</span></div>
-                        </div>
-                        <span class="spc-tag">สื่อการสอน</span>
-                    </div>
-                    <div class="spc-body">
-                        <h3 class="spc-title">Template Canva สำหรับครู 100+ แบบ</h3>
-                        <p class="spc-desc">Template สวยงาม พร้อมใช้ทันที ครอบคลุมทุกวิชา</p>
-                        <div class="spc-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i> <span>(67)</span></div>
-                        <div class="spc-footer">
-                            <div class="spc-price-wrap"><span class="spc-price">฿249</span><span class="spc-old">฿499</span></div>
-                            <button class="spc-add-btn"><i class="fa-solid fa-cart-plus"></i></button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tool -->
-                <div class="shop-product-card" data-cat="tool">
-                    <div class="spc-img course-img">
-                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&q=80" alt="Tool">
-                        <span class="spc-tag">เครื่องมือ</span>
-                    </div>
-                    <div class="spc-body">
-                        <h3 class="spc-title">Grade Book Pro - ระบบบันทึกเกรด</h3>
-                        <p class="spc-desc">ซอฟต์แวร์บันทึกคะแนนและเกรด รองรับทุกระดับชั้น</p>
-                        <div class="spc-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> <span>(43)</span></div>
-                        <div class="spc-footer">
-                            <div class="spc-price-wrap"><span class="spc-price">฿349</span><span class="spc-old">฿699</span></div>
-                            <button class="spc-add-btn"><i class="fa-solid fa-cart-plus"></i></button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Course 2 -->
-                <div class="shop-product-card" data-cat="course">
-                    <div class="spc-img course-img">
-                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&q=80" alt="Exam">
-                        <span class="spc-tag">คอร์สพิเศษ</span>
-                    </div>
-                    <div class="spc-body">
-                        <h3 class="spc-title">ติวเข้มภาค ข ครูผู้ช่วย 2569</h3>
-                        <p class="spc-desc">คอร์สติวเข้มภาค ข ครบทุกหมวดพร้อมเทคนิคทำข้อสอบ</p>
-                        <div class="spc-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> <span>(115)</span></div>
-                        <div class="spc-footer">
-                            <div class="spc-price-wrap"><span class="spc-price">฿599</span><span class="spc-old">฿1,199</span></div>
-                            <button class="spc-add-btn"><i class="fa-solid fa-cart-plus"></i></button>
-                        </div>
-                    </div>
-                </div>
-
+                <!-- Dynamic content will be loaded here -->
             </div>
 
             <!-- Load More -->
-            <div class="courses-load-more">
+            <div class="courses-load-more" id="shop-load-more" style="display: none;">
                 <button class="btn-load-more">ดูสินค้าเพิ่มเติม <i class="fa-solid fa-chevron-down"></i></button>
             </div>
         </div>
@@ -226,6 +91,7 @@
     </footer>
 
     <script src="navbar.js"></script>
+    <script type="module" src="js/renderShop.js"></script>
     <script>
         // Page transition on link click - Smooth fade out
         document.querySelectorAll('a[href$=".html"]').forEach(link => {
