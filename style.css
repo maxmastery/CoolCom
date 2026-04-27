@@ -1123,7 +1123,7 @@ body:has(.hero-viewport) {
     overflow: hidden;
     display: flex;
     align-items: stretch;
-    min-height: 210px;
+    min-height: 180px;
     position: relative;
     box-shadow: none;
     transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
@@ -1257,14 +1257,10 @@ body:has(.hero-viewport) {
 }
 
 .highlight-btn-circle {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, 50%);
-    width: 48px;
-    height: 48px;
-    background: var(--yellow);
-    color: #111111;
+    width: 44px;
+    height: 44px;
+    background: #111111;
+    color: #ffffff;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1272,16 +1268,14 @@ body:has(.hero-viewport) {
     text-decoration: none;
     transition: all 0.3s ease;
     flex-shrink: 0;
-    font-size: 1rem;
-    z-index: 30;
-    box-shadow: 0 10px 20px rgba(255, 195, 0, 0.3);
+    font-size: 0.8rem;
 }
 
 .highlight-row-card:hover .highlight-btn-circle {
-    background: #000;
-    color: var(--yellow);
-    transform: translate(-50%, 50%) scale(1.1);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+    background: var(--yellow);
+    color: #111;
+    transform: rotate(-45deg);
+    box-shadow: 0 4px 15px rgba(255, 195, 0, 0.4);
 }
 
 /* Mobile: stack vertically */
@@ -2705,16 +2699,13 @@ select:focus-visible {
 
 .card-special-tag {
     position: absolute;
-    top: 0;
-    left: 50%;
-    right: auto;
-    transform: translate(-50%, -50%);
-    z-index: 30;
+    top: 1.4rem;
+    right: 1.4rem;
     box-shadow: 0 16px 32px rgba(255, 195, 0, 0.24);
 }
 
 .highlight-row-content {
-    padding: 2.5rem 2.5rem 2.5rem;
+    padding: 1.5rem 2.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -2759,6 +2750,22 @@ select:focus-visible {
 
 .highlight-row-footer {
     padding-top: 1rem;
+}
+
+.highlight-link-yellow {
+    color: var(--yellow);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.highlight-link-yellow:hover {
+    transform: translateX(5px);
+    color: #e6b000;
 }
 
 .highlight-read-more {

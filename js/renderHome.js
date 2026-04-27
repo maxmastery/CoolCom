@@ -37,15 +37,14 @@ const loadHighlight = async () => {
             highlightContainer.innerHTML = `
                 <div class="highlight-row-card">
                     <div class="highlight-row-img">
-                        <span class="card-special-tag">SPECIAL!</span>
                         <img src="${item.thumbnail_url || 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=800&q=80'}" alt="${item.title || 'Highlight'}">
                     </div>
                     <div class="highlight-row-content">
                         ${item.categories ? `<span class="highlight-pill-badge">${item.categories.name}</span>` : '<span class="highlight-pill-badge">HIGHLIGHT</span>'}
                         <h3 class="highlight-row-title">${item.title || 'ไม่มีชื่อหัวข้อ'}</h3>
                         <p class="highlight-row-desc">${desc}</p>
-                        <div class="highlight-row-footer">
-                            <a href="${targetLink}" class="highlight-btn-circle"><i class="fa-solid fa-chevron-right"></i></a>
+                        <div class="highlight-row-footer" style="margin-top: 1.5rem; display: flex; justify-content: flex-end;">
+                            <a href="${targetLink}" class="highlight-link-yellow">อ่านเพิ่มเติม <i class="fa-solid fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
