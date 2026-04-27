@@ -109,6 +109,7 @@ async function updatePublicStats() {
         }
 
         try {
+            // console.log('Fetching visitor stats...');
             const stats = await getVisitorStats();
             if (stats) {
                 visitorsEl.innerText = (stats.totalUniqueVisitors || 0).toLocaleString();
@@ -119,9 +120,11 @@ async function updatePublicStats() {
                 if (totalEl) totalEl.innerText = (stats.totalVisits || 0).toLocaleString();
                 // console.log('Public stats updated successfully');
             } else {
-                console.warn('Failed to fetch visitor stats (RPC returned null)');
+                visitorsEl.innerText = '0';
+                console.warn('Failed to fetch visitor stats (RPC returned null or empty)');
             }
         } catch (err) {
+            visitorsEl.innerText = '0';
             console.error('Error updating public stats:', err.message);
         }
     };
@@ -142,16 +145,29 @@ if (document.readyState === 'loading') {
 export async function getVisitorStats() {
     try {
         const { data, error } = await supabase.rpc('get_public_visitor_stats');
-        if (error) throw error;
+        
+        if (error) {
+            console.error('RPC Error (get_public_visitor_stats):', error.message, error.details, error.hint);
+            throw error;
+        }
+
+        if (!data) {
+            return {
+                totalVisits: 0,
+                todayVisits: 0,
+                uniqueVisitorsToday: 0,
+                totalUniqueVisitors: 0
+            };
+        }
 
         return {
-            totalVisits: data?.total_visits || 0,
-            todayVisits: data?.today_visits || 0,
-            uniqueVisitorsToday: data?.today_unique_visitors || 0,
-            totalUniqueVisitors: data?.total_unique_visitors || 0
+            totalVisits: data.total_visits || 0,
+            todayVisits: data.today_visits || 0,
+            uniqueVisitorsToday: data.today_unique_visitors || 0,
+            totalUniqueVisitors: data.total_unique_visitors || 0
         };
     } catch (err) {
-        console.error('Stats fetch error:', err);
+        console.error('getVisitorStats exception:', err);
         return null;
     }
 }
