@@ -79,40 +79,40 @@ async function trackVisit() {
  * Update stats displayed in the footer
  */
 async function updatePublicStats() {
-    const todayEl = document.getElementById('stat-today');
-    const visitorsEl = document.getElementById('stat-visitors');
-    const totalEl = document.getElementById('stat-total');
+    let retries = 0;
+    const maxRetries = 10;
     
-    if (!todayEl && !visitorsEl && !totalEl) return;
-
-    try {
-        const stats = await getVisitorStats();
-        if (stats) {
-            if (todayEl) todayEl.innerText = (stats.uniqueVisitorsToday || 0).toLocaleString();
-            if (visitorsEl) visitorsEl.innerText = (stats.totalUniqueVisitors || 0).toLocaleString();
-            if (totalEl) totalEl.innerText = (stats.totalVisits || 0).toLocaleString();
+    const tryUpdate = async () => {
+        const visitorsEl = document.getElementById('stat-visitors');
+        
+        if (!visitorsEl) {
+            if (retries < maxRetries) {
+                retries++;
+                // console.log(`Footer stats element not found, retry ${retries}/${maxRetries}...`);
+                setTimeout(tryUpdate, 500);
+            }
             return;
         }
-    } catch (err) {
-        // Silently fail for public stats
-    }
 
-    // Retry once if footer is injected after this script runs
-    setTimeout(async () => {
-        const todayEl2 = document.getElementById('stat-today');
-        const visitorsEl2 = document.getElementById('stat-visitors');
-        const totalEl2 = document.getElementById('stat-total');
-        if (!todayEl2 && !visitorsEl2 && !totalEl2) return;
         try {
             const stats = await getVisitorStats();
-            if (!stats) return;
-            if (todayEl2) todayEl2.innerText = (stats.uniqueVisitorsToday || 0).toLocaleString();
-            if (visitorsEl2) visitorsEl2.innerText = (stats.totalUniqueVisitors || 0).toLocaleString();
-            if (totalEl2) totalEl2.innerText = (stats.totalVisits || 0).toLocaleString();
-        } catch (e) {
-            // ignore
+            if (stats) {
+                visitorsEl.innerText = (stats.totalUniqueVisitors || 0).toLocaleString();
+                // Update other stats if they exist (backward compatibility)
+                const todayEl = document.getElementById('stat-today');
+                const totalEl = document.getElementById('stat-total');
+                if (todayEl) todayEl.innerText = (stats.uniqueVisitorsToday || 0).toLocaleString();
+                if (totalEl) totalEl.innerText = (stats.totalVisits || 0).toLocaleString();
+                // console.log('Public stats updated successfully');
+            } else {
+                console.warn('Failed to fetch visitor stats (RPC returned null)');
+            }
+        } catch (err) {
+            console.error('Error updating public stats:', err.message);
         }
-    }, 300);
+    };
+
+    tryUpdate();
 }
 
 // Execute on load
