@@ -121,7 +121,7 @@ const loadVideos = async () => {
         console.log('Videos received:', videos?.length);
         
         if (!videos || videos.length === 0) {
-            showEmptyState(videoContainer, 'Content ดี ๆ กำลังจะมาเร็ว ๆ นี้', 'fa-solid fa-circle-play');
+            showEmptyState(videoContainer, 'Content ดี ๆ กำลังจะมาเร็ว ๆ นี้', 'fa-solid fa-circle-play', true);
         } else {
             const mainVideo = videos[0];
             const mainYoutubeId = mainVideo.youtube_id || extractYoutubeId(mainVideo.youtube_url);

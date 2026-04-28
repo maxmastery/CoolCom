@@ -15,13 +15,18 @@ export function showLoadingState(container) {
     `;
 }
 
-export function showEmptyState(container, message = 'ยังไม่มีข้อมูลในหมวดหมู่นี้', iconClass = 'fa-solid fa-box-open') {
+export function showEmptyState(container, message = 'ยังไม่มีข้อมูลในหมวดหมู่นี้', iconClass = 'fa-solid fa-box-open', isDark = false) {
     if(!container) return;
+    const textColor = isDark ? '#ffffff' : '#1a1a1a';
+    const bgColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.03)';
+    const borderColor = isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.15)';
+    const iconOpacity = isDark ? 1 : 0.3;
+
     container.innerHTML = `
-        <div class="empty-state" style="text-align: center; padding: 4rem 2rem; width: 100%; grid-column: 1 / -1; background: rgba(0,0,0,0.03); border-radius: 12px; border: 1px dashed rgba(0,0,0,0.15);">
-            <i class="${iconClass}" style="font-size: 3rem; color: #1a1a1a; opacity: 0.3; margin-bottom: 1rem;"></i>
-            <h3 style="color: #1a1a1a; margin-bottom: 0.5rem;">${message}</h3>
-            <p style="color: #1a1a1a; opacity: 0.6; font-size: 0.9rem;">ข้อมูลจะถูกเพิ่มเข้ามาในเร็ว ๆ นี้</p>
+        <div class="empty-state" style="text-align: center; padding: 4rem 2rem; width: 100%; grid-column: 1 / -1; background: ${bgColor}; border-radius: 12px; border: 1px dashed ${borderColor};">
+            <i class="${iconClass}" style="font-size: 3rem; color: ${textColor}; opacity: ${iconOpacity}; margin-bottom: 1rem;"></i>
+            <h3 style="color: ${textColor}; margin-bottom: 0.5rem; opacity: 1;">${message}</h3>
+            <p style="color: ${textColor}; opacity: 0.9; font-size: 0.9rem;">ข้อมูลจะถูกเพิ่มเข้ามาในเร็ว ๆ นี้</p>
         </div>
     `;
 }

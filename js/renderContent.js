@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const videos = await fetchContentVideos();
         
         if (!videos || videos.length === 0) {
-            showEmptyState(grid, 'Content ดี ๆ กำลังจะมาเร็ว ๆ นี้<br><span style="font-size: 0.9rem; opacity: 0.8; font-weight: normal;">ข้อมูลจะถูกเพิ่มเข้ามาในเร็ว ๆ นี้ ด้วย</span>', 'fa-solid fa-circle-play');
+            showEmptyState(grid, 'Content ดี ๆ กำลังจะมาเร็ว ๆ นี้', 'fa-solid fa-circle-play', true);
             // Hide the load more button if it exists
             const moreBtn = document.querySelector('.content-more-btn-wrapper');
             if (moreBtn) moreBtn.style.display = 'none';
