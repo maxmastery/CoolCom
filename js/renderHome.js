@@ -29,10 +29,22 @@ const loadHighlight = async () => {
             
             // Determine link based on type
             let targetLink = 'courses.html';
-            if (item.type === 'blog_posts') targetLink = `blog-post.html?slug=${item.slug}`;
-            else if (item.type === 'tools') targetLink = 'tools.html';
-            else if (item.type === 'content_videos') targetLink = 'content.html';
-            else if (item.type === 'products') targetLink = 'shop.html';
+            const itemType = String(item.type || '').toLowerCase();
+            
+            if (itemType.includes('course')) {
+                targetLink = item.slug ? `course-preview.html?slug=${item.slug}` : 'courses.html';
+            } else if (itemType.includes('blog')) {
+                targetLink = item.slug ? `blog-post.html?slug=${item.slug}` : 'blog.html';
+            } else if (itemType === 'tools') {
+                targetLink = 'tools.html';
+            } else if (itemType === 'content_videos') {
+                targetLink = 'content.html';
+            } else if (itemType === 'products') {
+                targetLink = 'shop.html';
+            } else {
+                // Last resort fallback
+                targetLink = item.slug ? `course-preview.html?slug=${item.slug}` : 'courses.html';
+            }
             
             highlightContainer.innerHTML = `
                 <div class="highlight-row-card">
